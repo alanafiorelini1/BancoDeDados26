@@ -1,7 +1,7 @@
 ### Banco De Dados 2026
 
 ## Lista de exercícios
-• *Imobiliária:* Arquivo no repositório.
+• *Imobiliária:*[ Arquivo no repositório.](https://github.com/alanafiorelini1/BancoDeDados26/blob/main/mer_imobiliaria.brM3)
 
 • *Escola - conceitual:* https://app.brmodeloweb.com/#!/publicview/69d6bb84e56bc192cf4fe6aa
 
