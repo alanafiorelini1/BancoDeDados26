@@ -13,4 +13,4 @@
 
 • *Veterinário - conceitual:* https://app.brmodeloweb.com/#!/publicview/69d6bbd4e56bc192cf4fe70f
 
-• *Veterinário - lógico:* https://app.brmodeloweb.com/#!/publicview/69d6bc03e56bc192cf4fe75c
+• *Veterinário - lógico:* https://app.brmodeloweb.com/#!/publicview/69d6c028e56bc192cf4fe9c2
