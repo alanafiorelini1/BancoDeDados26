@@ -228,7 +228,244 @@ MariaDB [produtos]> update produtos set marca = 'Monster' where idproduto = 14;
 Query OK, 1 row affected (0.025 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
-MariaDB [produtos]>
+MariaDB [(none)]> use produtos;
+Database changed
+MariaDB [produtos]> describe produtos;
++------------+---------------+------+-----+---------+----------------+
+| Field      | Type          | Null | Key | Default | Extra          |
++------------+---------------+------+-----+---------+----------------+
+| idproduto  | int(11)       | NO   | PRI | NULL    | auto_increment |
+| produto    | varchar(200)  | NO   |     | NULL    |                |
+| preco      | decimal(10,2) | NO   |     | NULL    |                |
+| qtd        | int(11)       | NO   |     | NULL    |                |
+| data       | date          | NO   |     | NULL    |                |
+| ativo      | bit(1)        | NO   |     | NULL    |                |
+| idcat      | int(11)       | YES  | MUL | NULL    |                |
+| observacao | varchar(255)  | YES  |     | NULL    |                |
+| marca      | varchar(100)  | NO   |     | NULL    |                |
++------------+---------------+------+-----+---------+----------------+
+9 rows in set (0.005 sec)
+
+MariaDB [produtos]> delete from produtos where idproduto = 13;
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [produtos]> select * from categoria;
++-------------+------------+
+| idcategoria | categoria  |
++-------------+------------+
+|           1 | Enlatados  |
+|           2 | Laticínios |
+|           3 | Açougue    |
+|           4 | Limpeza    |
+|           5 | Bebidas    |
++-------------+------------+
+5 rows in set (0.000 sec)
+
+MariaDB [produtos]> select * from produtos;
++-----------+-----------------+-------+-----+------------+-------+-------+-------------+--------------+
+| idproduto | produto         | preco | qtd | data       | ativo | idcat | observacao  | marca        |
++-----------+-----------------+-------+-----+------------+-------+-------+-------------+--------------+
+|         1 | Acém peça       | 39.99 |  50 | 2026-05-13 |      |     3 | Sem gordura | Sadia        |
+|         2 | Sabão em pó     | 15.99 |  30 | 2026-05-13 |      |     4 |             | OMO          |
+|         3 | Ervilha         |  5.56 |  10 | 2026-05-13 |       |     1 |             | Quero        |
+|         4 | Leite           | 25.45 |  40 | 2026-05-13 |      |     2 |             | Piracanjuba  |
+|         5 | Refrigerante    | 12.50 |  60 | 2026-05-26 |      |     5 | Sem açúcar  | Coca-cola    |
+|         6 | Suco em caixa   | 10.20 |  40 | 2026-05-26 |      |     5 |             | Del vale     |
+|         7 | Amaciante       | 20.99 |  43 | 2026-05-26 |      |     4 |             | Comfort      |
+|         8 | Peito de frango | 25.20 |  71 | 2026-05-26 |      |     3 | Sem gordura | Sadia        |
+|         9 | Requeijão       | 11.00 |  18 | 2026-05-26 |       |     2 |             | Vigor        |
+|        10 | Milho           |  8.60 |  23 | 2026-05-26 |       |     1 |             | Quero        |
+|        11 | Queijo          | 13.43 |  31 | 2026-05-26 |       |     2 |             | President    |
+|        12 | Esponja         |  8.99 |  60 | 2026-05-26 |      |     4 |             | Scotch-Brite |
+|        14 | Energético      |  6.00 |  34 | 2026-05-26 |      |     5 |             | Monster      |
++-----------+-----------------+-------+-----+------------+-------+-------+-------------+--------------+
+13 rows in set (0.000 sec)
+
+MariaDB [produtos]> select produto, preco from produtos;
++-----------------+-------+
+| produto         | preco |
++-----------------+-------+
+| Acém peça       | 39.99 |
+| Sabão em pó     | 15.99 |
+| Ervilha         |  5.56 |
+| Leite           | 25.45 |
+| Refrigerante    | 12.50 |
+| Suco em caixa   | 10.20 |
+| Amaciante       | 20.99 |
+| Peito de frango | 25.20 |
+| Requeijão       | 11.00 |
+| Milho           |  8.60 |
+| Queijo          | 13.43 |
+| Esponja         |  8.99 |
+| Energético      |  6.00 |
++-----------------+-------+
+13 rows in set (0.000 sec)
+
+MariaDB [produtos]> select * from produtos where marca = 'Sadia';
++-----------+-----------------+-------+-----+------------+-------+-------+-------------+-------+
+| idproduto | produto         | preco | qtd | data       | ativo | idcat | observacao  | marca |
++-----------+-----------------+-------+-----+------------+-------+-------+-------------+-------+
+|         1 | Acém peça       | 39.99 |  50 | 2026-05-13 |      |     3 | Sem gordura | Sadia |
+|         8 | Peito de frango | 25.20 |  71 | 2026-05-26 |      |     3 | Sem gordura | Sadia |
++-----------+-----------------+-------+-----+------------+-------+-------+-------------+-------+
+2 rows in set (0.001 sec)
+
+MariaDB [produtos]> select * from produtos where preco > 20;
++-----------+-----------------+-------+-----+------------+-------+-------+-------------+-------------+
+| idproduto | produto         | preco | qtd | data       | ativo | idcat | observacao  | marca       |
++-----------+-----------------+-------+-----+------------+-------+-------+-------------+-------------+
+|         1 | Acém peça       | 39.99 |  50 | 2026-05-13 |      |     3 | Sem gordura | Sadia       |
+|         4 | Leite           | 25.45 |  40 | 2026-05-13 |      |     2 |             | Piracanjuba |
+|         7 | Amaciante       | 20.99 |  43 | 2026-05-26 |      |     4 |             | Comfort     |
+|         8 | Peito de frango | 25.20 |  71 | 2026-05-26 |      |     3 | Sem gordura | Sadia       |
++-----------+-----------------+-------+-----+------------+-------+-------+-------------+-------------+
+4 rows in set (0.002 sec)
+
+MariaDB [produtos]> select * from produtos where qtd <= 40;
++-----------+---------------+-------+-----+------------+-------+-------+------------+-------------+
+| idproduto | produto       | preco | qtd | data       | ativo | idcat | observacao | marca       |
++-----------+---------------+-------+-----+------------+-------+-------+------------+-------------+
+|         2 | Sabão em pó   | 15.99 |  30 | 2026-05-13 |      |     4 |            | OMO         |
+|         3 | Ervilha       |  5.56 |  10 | 2026-05-13 |       |     1 |            | Quero       |
+|         4 | Leite         | 25.45 |  40 | 2026-05-13 |      |     2 |            | Piracanjuba |
+|         6 | Suco em caixa | 10.20 |  40 | 2026-05-26 |      |     5 |            | Del vale    |
+|         9 | Requeijão     | 11.00 |  18 | 2026-05-26 |       |     2 |            | Vigor       |
+|        10 | Milho         |  8.60 |  23 | 2026-05-26 |       |     1 |            | Quero       |
+|        11 | Queijo        | 13.43 |  31 | 2026-05-26 |       |     2 |            | President   |
+|        14 | Energético    |  6.00 |  34 | 2026-05-26 |      |     5 |            | Monster     |
++-----------+---------------+-------+-----+------------+-------+-------+------------+-------------+
+8 rows in set (0.001 sec)
+
+MariaDB [produtos]> select produto, preco from produtos order by preco asc limit 5;
++---------------+-------+
+| produto       | preco |
++---------------+-------+
+| Ervilha       |  5.56 |
+| Energético    |  6.00 |
+| Milho         |  8.60 |
+| Esponja       |  8.99 |
+| Suco em caixa | 10.20 |
++---------------+-------+
+5 rows in set (0.001 sec)
+
+MariaDB [produtos]> select nome,preco from produtos order by preco desc limit 5;
+ERROR 1054 (42S22): Unknown column 'nome' in 'field list'
+MariaDB [produtos]> select produto,preco from produtos order by preco desc limit 5;
++-----------------+-------+
+| produto         | preco |
++-----------------+-------+
+| Acém peça       | 39.99 |
+| Leite           | 25.45 |
+| Peito de frango | 25.20 |
+| Amaciante       | 20.99 |
+| Sabão em pó     | 15.99 |
++-----------------+-------+
+5 rows in set (0.000 sec)
+
+MariaDB [produtos]> select count(*) as total_produtos from produtos;
++----------------+
+| total_produtos |
++----------------+
+|             13 |
++----------------+
+1 row in set (0.000 sec)
+
+MariaDB [produtos]> select avg(preco) as preco_medio from produtos;
++-------------+
+| preco_medio |
++-------------+
+|   15.684615 |
++-------------+
+1 row in set (0.001 sec)
+
+MariaDB [produtos]> select produto, qtd from produtos order by qtd desc limit 1;
++-----------------+-----+
+| produto         | qtd |
++-----------------+-----+
+| Peito de frango |  71 |
++-----------------+-----+
+1 row in set (0.000 sec)
+
+MariaDB [produtos]> select p.produto, c.categoria from produtos p join categoria c on p.idcat = c.idcategoria;
++-----------------+------------+
+| produto         | categoria  |
++-----------------+------------+
+| Ervilha         | Enlatados  |
+| Milho           | Enlatados  |
+| Leite           | Laticínios |
+| Requeijão       | Laticínios |
+| Queijo          | Laticínios |
+| Acém peça       | Açougue    |
+| Peito de frango | Açougue    |
+| Sabão em pó     | Limpeza    |
+| Amaciante       | Limpeza    |
+| Esponja         | Limpeza    |
+| Refrigerante    | Bebidas    |
+| Suco em caixa   | Bebidas    |
+| Energético      | Bebidas    |
++-----------------+------------+
+13 rows in set (0.001 sec)
+
+MariaDB [produtos]> select p.produto, p.marca, p.preco from produtos p join categoria c on p.idcat = c.idcategoria where c.categoria = 'Laticínios';
++-----------+-------------+-------+
+| produto   | marca       | preco |
++-----------+-------------+-------+
+| Leite     | Piracanjuba | 25.45 |
+| Requeijão | Vigor       | 11.00 |
+| Queijo    | President   | 13.43 |
++-----------+-------------+-------+
+3 rows in set (0.001 sec)
+
+MariaDB [produtos]> select c.categoria, count(*) as total_produtos from produtos p join categoria c on p.idcat = c.idcategoria group by c.categoria;
++------------+----------------+
+| categoria  | total_produtos |
++------------+----------------+
+| Açougue    |              2 |
+| Bebidas    |              3 |
+| Enlatados  |              2 |
+| Laticínios |              3 |
+| Limpeza    |              3 |
++------------+----------------+
+5 rows in set (0.002 sec)
+
+MariaDB [produtos]> select * from produtos where preco between 10 and 20;
++-----------+---------------+-------+-----+------------+-------+-------+------------+-----------+
+| idproduto | produto       | preco | qtd | data       | ativo | idcat | observacao | marca     |
++-----------+---------------+-------+-----+------------+-------+-------+------------+-----------+
+|         2 | Sabão em pó   | 15.99 |  30 | 2026-05-13 |      |     4 |            | OMO       |
+|         5 | Refrigerante  | 12.50 |  60 | 2026-05-26 |      |     5 | Sem açúcar | Coca-cola |
+|         6 | Suco em caixa | 10.20 |  40 | 2026-05-26 |      |     5 |            | Del vale  |
+|         9 | Requeijão     | 11.00 |  18 | 2026-05-26 |       |     2 |            | Vigor     |
+|        11 | Queijo        | 13.43 |  31 | 2026-05-26 |       |     2 |            | President |
++-----------+---------------+-------+-----+------------+-------+-------+------------+-----------+
+5 rows in set (0.002 sec)
+
+MariaDB [produtos]> select * from produtos where produto like 'P%';
++-----------+-----------------+-------+-----+------------+-------+-------+-------------+-------+
+| idproduto | produto         | preco | qtd | data       | ativo | idcat | observacao  | marca |
++-----------+-----------------+-------+-----+------------+-------+-------+-------------+-------+
+|         8 | Peito de frango | 25.20 |  71 | 2026-05-26 |      |     3 | Sem gordura | Sadia |
++-----------+-----------------+-------+-----+------------+-------+-------+-------------+-------+
+1 row in set (0.000 sec)
+
+MariaDB [produtos]> select distinct marca from produtos;
++--------------+
+| marca        |
++--------------+
+| Sadia        |
+| OMO          |
+| Quero        |
+| Piracanjuba  |
+| Coca-cola    |
+| Del vale     |
+| Comfort      |
+| Vigor        |
+| President    |
+| Scotch-Brite |
+| Monster      |
++--------------+
+11 rows in set (0.001 sec)
+
 
 update produtos set marca = '' where idproduto = 1;
 
