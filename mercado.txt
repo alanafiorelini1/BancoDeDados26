@@ -466,8 +466,3 @@ MariaDB [produtos]> select distinct marca from produtos;
 +--------------+
 11 rows in set (0.001 sec)
 
-
-update produtos set marca = '' where idproduto = 1;
-
-
-('',,,'',,,''),
