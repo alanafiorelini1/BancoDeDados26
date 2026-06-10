@@ -1,0 +1,181 @@
+Microsoft Windows [versão 6.3.9600]
+(c) 2013 Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\ETEC>cd C:\xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 81
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database jornal;
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [(none)]> create table categoria(
+    -> idcategoria int primary key auto_increment,
+    -> categoria varchar(30));
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> use jornal;
+Database changed
+MariaDB [jornal]> create table categoria(
+    -> idcategoria int primary key auto_increment,
+    -> categoria varchar(30));
+Query OK, 0 rows affected (0.169 sec)
+
+MariaDB [jornal]> describe categorias;
+ERROR 1146 (42S02): Table 'jornal.categorias' doesn't exist
+MariaDB [jornal]> describe categoria
+    -> ;
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| idcategoria | int(11)     | NO   | PRI | NULL    | auto_increment |
+| categoria   | varchar(30) | YES  |     | NULL    |                |
++-------------+-------------+------+-----+---------+----------------+
+2 rows in set (0.030 sec)
+
+MariaDB [jornal]> rename table categoria to categorias;
+Query OK, 0 rows affected (0.158 sec)
+
+MariaDB [jornal]> show tables;
++------------------+
+| Tables_in_jornal |
++------------------+
+| categorias       |
++------------------+
+1 row in set (0.000 sec)
+
+MariaDB [jornal]> alter table categorias change collumn categoria nomeCategoria;
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near '' a
+t line 1
+MariaDB [jornal]> alter table categorias change collumn categoria nomeCategoria
+varchar(30) not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near 'var
+char(30) not null' at line 1
+MariaDB [jornal]> alter table categorias change collumn categoria nomeCategoria
+varchar(30) not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near 'var
+char(30) not null' at line 1
+MariaDB [jornal]> alter table categorias change column categoria nomeCategoria v
+archar(30) not null;
+Query OK, 0 rows affected (1.351 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [jornal]> describe categorias;
++---------------+-------------+------+-----+---------+----------------+
+| Field         | Type        | Null | Key | Default | Extra          |
++---------------+-------------+------+-----+---------+----------------+
+| idcategoria   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nomeCategoria | varchar(30) | NO   |     | NULL    |                |
++---------------+-------------+------+-----+---------+----------------+
+2 rows in set (0.154 sec)
+
+MariaDB [jornal]> alter table categorias add column teste varchar(10);
+Query OK, 0 rows affected (0.045 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [jornal]> alter table categorias drop column teste;
+Query OK, 0 rows affected (0.063 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [jornal]> create table redator(
+    -> codRedator int auto_increment primary key,
+    -> nome varchar(100),
+    -> dataNascimento date,
+    -> email varchar(50) unique,
+    -> telefone varchar(15);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near '' a
+t line 6
+MariaDB [jornal]> create table redator(
+    -> codRedator int auto_increment primary key,
+    -> nome varchar(100),
+    -> dataNascimento date,
+    -> email varchar(50) unique,
+    -> telefone varchar(15));
+Query OK, 0 rows affected (0.135 sec)
+
+MariaDB [jornal]> alter table categorias add column cpf varchar(16) unique;
+Query OK, 0 rows affected (1.520 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [jornal]> describe categorias;
++---------------+-------------+------+-----+---------+----------------+
+| Field         | Type        | Null | Key | Default | Extra          |
++---------------+-------------+------+-----+---------+----------------+
+| idcategoria   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nomeCategoria | varchar(30) | NO   |     | NULL    |                |
+| cpf           | varchar(16) | YES  | UNI | NULL    |                |
++---------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.159 sec)
+
+MariaDB [jornal]> alter table categorias drop column cpf;
+Query OK, 0 rows affected (0.081 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [jornal]> describe redator;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| codRedator     | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nome           | varchar(100) | YES  |     | NULL    |                |
+| dataNascimento | date         | YES  |     | NULL    |                |
+| email          | varchar(50)  | YES  | UNI | NULL    |                |
+| telefone       | varchar(15)  | YES  |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.032 sec)
+
+MariaDB [jornal]> alter table redator add column cpf varchar(16) unique;
+Query OK, 0 rows affected (0.553 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [jornal]> describe redator;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| codRedator     | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nome           | varchar(100) | YES  |     | NULL    |                |
+| dataNascimento | date         | YES  |     | NULL    |                |
+| email          | varchar(50)  | YES  | UNI | NULL    |                |
+| telefone       | varchar(15)  | YES  |     | NULL    |                |
+| cpf            | varchar(16)  | YES  | UNI | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.031 sec)
+
+MariaDB [jornal]> alter table redator change column codRedator idRedator;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near '' a
+t line 1
+MariaDB [jornal]> create table noticias;
+ERROR 1113 (42000): A table must have at least 1 column
+MariaDB [jornal]> create table noticias(
+    -> idNoticias int primary key auto_increment,
+    -> tituloNoticia varchar(50),
+    -> data date;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near '' a
+t line 4
+MariaDB [jornal]> create table noticias(
+    -> idNoticias int primary key auto_increment,
+    -> tituloNoticia varchar(50),
+    -> data date);
+Query OK, 0 rows affected (0.201 sec)
+
+MariaDB [jornal]> alter table noticias add constraint fk_id_redator foreign key
+references;[
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near 'ref
+erences' at line 1
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near '['
+at line 1
+MariaDB [jornal]>
