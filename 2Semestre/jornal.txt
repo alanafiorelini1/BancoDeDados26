@@ -1,4 +1,4 @@
-Microsoft Windows [versão 6.3.9600]
+Microsoft Windows [versÃ£o 6.3.9600]
 (c) 2013 Microsoft Corporation. Todos os direitos reservados.
 
 C:\Users\ETEC>cd C:\xampp\mysql\bin
